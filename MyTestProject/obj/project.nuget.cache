@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ds199ML46DTZVyzHPV5RBuJjQC4+igBDdBINHf5fNM6U7HFLymSIXPpJvUOI93t6KyzI45nKnSACFjwRmVV+nQ==",
+  "dgSpecHash": "nRYkvYVgvGWHuBJhIKqL4rY5AK2VM0okFl7SnC0B4SKoNd/Mmt51hLf4ZZdNBLE4CqhlcZan//ehljCf+SyG8w==",
   "success": true,
   "projectFilePath": "/Users/jerryalbert/RiderProjects/MyTestProject/MyTestProject/MyTestProject.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "/Users/jerryalbert/.nuget/packages/microsoft.codeanalysis.csharp/3.9.0/microsoft.codeanalysis.csharp.3.9.0.nupkg.sha512",
     "/Users/jerryalbert/.nuget/packages/microsoft.codecoverage/17.8.0/microsoft.codecoverage.17.8.0.nupkg.sha512",
     "/Users/jerryalbert/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/Users/jerryalbert/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.3/microsoft.extensions.dependencyinjection.9.0.3.nupkg.sha512",
+    "/Users/jerryalbert/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.3/microsoft.extensions.dependencyinjection.abstractions.9.0.3.nupkg.sha512",
     "/Users/jerryalbert/.nuget/packages/microsoft.net.test.sdk/17.8.0/microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "/Users/jerryalbert/.nuget/packages/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "/Users/jerryalbert/.nuget/packages/microsoft.testplatform.objectmodel/17.8.0/microsoft.testplatform.objectmodel.17.8.0.nupkg.sha512",

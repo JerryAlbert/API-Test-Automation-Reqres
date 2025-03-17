@@ -2,6 +2,7 @@ using System.Net;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using MyTestProject.Base;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -15,10 +16,14 @@ namespace MyTestProject.Tests
     {
         public static ExtentReports extent;
         private static string extentReportPath;
+        
+        // Make the service provider accessible to all test classes
+        public static IServiceProvider ServiceProvider { get; private set; }
 
         [OneTimeSetUp]
         public void SetUp()
         {
+            // 1) Set up ExtentReport
             extentReportPath = Path.Combine(TestContext.CurrentContext.WorkDirectory,
                 "MyTestReport.html");
             extent = new ExtentReports();
@@ -26,6 +31,17 @@ namespace MyTestProject.Tests
             extent.AttachReporter(spark);
 
             TestContext.WriteLine($"Report will be saved to: {extentReportPath}");
+            
+            // 2) Build DI container
+            var services = new ServiceCollection();
+            
+            // Register your custom class as a singleton or transient
+            // In this example, we register 'RestLibrary' as a Singleton
+            services.AddSingleton<RestLibrary>();
+            
+            // Build the container
+            ServiceProvider = services.BuildServiceProvider();
+
         }
 
         [OneTimeTearDown]
@@ -33,6 +49,12 @@ namespace MyTestProject.Tests
         {
             extent.Flush();
             TestContext.WriteLine($"Report generated at: {extentReportPath}");
+            
+            // Dispose of ServiceProvider (if it’s IDisposable)
+            if (ServiceProvider is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
     }
 
@@ -40,15 +62,21 @@ namespace MyTestProject.Tests
     public class MyTests
     {
         private ExtentTest _test;
-        private RestClientOptions _restClientOptions;
         private RestClient client;
 
         [SetUp]
         public void Init()
         {
+            // 1) Create test in Extent
             _test = TestSetup.extent.CreateTest(TestContext.CurrentContext.Test.Name);
 
-            var restLibrary = new RestLibrary();
+            // 2) Retrieve RestLibrary via DI
+            //    (pulls from TestSetup.ServiceProvider where we registered it)
+            var restLibrary = TestSetup.ServiceProvider.GetService<RestLibrary>();
+
+            // var restLibrary = new RestLibrary();
+            
+            // 3) Use the RestLibrary's RestClient
             client = restLibrary.RestClient;
 
         }
