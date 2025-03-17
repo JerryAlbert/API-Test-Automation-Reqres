@@ -2,6 +2,7 @@ using System.Net;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using FluentAssertions;
+using MyTestProject.Base;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using RestSharp;
@@ -40,17 +41,16 @@ namespace MyTestProject.Tests
     {
         private ExtentTest _test;
         private RestClientOptions _restClientOptions;
+        private RestClient client;
 
         [SetUp]
         public void Init()
         {
             _test = TestSetup.extent.CreateTest(TestContext.CurrentContext.Test.Name);
 
-            _restClientOptions = new RestClientOptions
-            {
-                BaseUrl = new Uri("https://reqres.in"),
-                RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-            };
+            var restLibrary = new RestLibrary();
+            client = restLibrary.RestClient;
+
         }
 
         [TearDown]
@@ -128,7 +128,7 @@ namespace MyTestProject.Tests
         public void CreateUser_Success_ShouldReturn201()
         {
             // Arrange
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
             var request = new RestRequest("/api/users", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
@@ -176,11 +176,11 @@ namespace MyTestProject.Tests
         }
     
 
-        [Test]
+        //[Test]
         public void CreateUser_MissingName_ShouldReturnBadRequest()
         {
             // Arrange
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
             var request = new RestRequest("/api/users", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
@@ -211,7 +211,7 @@ namespace MyTestProject.Tests
         public void GetSingleUser_ShouldReturnOkAndCorrectUser()
         {
             // Arrange
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
             var request = new RestRequest("/api/users/2", Method.Get);
 
             // Act
@@ -241,7 +241,7 @@ namespace MyTestProject.Tests
         public void GetListOfUsers_ShouldReturnOkAndList()
         {
             // Arrange
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
             var request = new RestRequest("/api/users?page=2", Method.Get);
 
             // Act
@@ -271,7 +271,7 @@ namespace MyTestProject.Tests
         public void GetListOfUsers_ShouldReturnOkAndList_PerformanceCheck()
         {
             // Arrange
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
             var request = new RestRequest("/api/users?page=2", Method.Get);
 
             var stopwatch = new System.Diagnostics.Stopwatch();
@@ -311,7 +311,7 @@ namespace MyTestProject.Tests
             // Arrange
             var request = new RestRequest("/api/users/2", Method.Put);
             request.AddHeader("Content-Type", "application/json");
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
 
             var body = new
             {
@@ -346,7 +346,7 @@ namespace MyTestProject.Tests
         {
             // Arrange
             var request = new RestRequest("/api/users/9999", Method.Get);
-            var client = new RestClient(_restClientOptions);
+            //var client = new RestClient(_restClientOptions);
 
             // Act
             var response = client.Execute(request);

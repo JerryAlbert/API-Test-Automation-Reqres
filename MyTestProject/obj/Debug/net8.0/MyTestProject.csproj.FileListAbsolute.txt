@@ -139,3 +139,4 @@
 /Users/jerryalbert/RiderProjects/MyTestProject/MyTestProject/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
 /Users/jerryalbert/RiderProjects/MyTestProject/MyTestProject/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
 /Users/jerryalbert/RiderProjects/MyTestProject/MyTestProject/bin/Debug/net8.0/Newtonsoft.Json.Schema.dll
+/Users/jerryalbert/RiderProjects/MyTestProject/MyTestProject/obj/Debug/net8.0/MyTestProject.sourcelink.json
