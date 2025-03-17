@@ -23,9 +23,22 @@ namespace MyTestProject.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
-            // 1) Set up ExtentReport
-            extentReportPath = Path.Combine(TestContext.CurrentContext.WorkDirectory,
-                "MyTestReport.html");
+        
+            var projectDirectory = Path.GetFullPath(
+                Path.Combine(TestContext.CurrentContext.WorkDirectory, "..", "..", "..")
+            );
+
+            // Now create or reference the "Reports" folder
+            var reportsFolder = Path.Combine(projectDirectory, "Reports");
+            Directory.CreateDirectory(reportsFolder);
+            
+            // Now build the full path for your report file
+            extentReportPath = Path.Combine(reportsFolder, "MyTestReport.html");
+            
+            // // 1) Set up ExtentReport
+            // extentReportPath = Path.Combine(TestContext.CurrentContext.WorkDirectory,
+            //     "MyTestReport.html");
+            
             extent = new ExtentReports();
             var spark = new ExtentSparkReporter(extentReportPath);
             extent.AttachReporter(spark);
